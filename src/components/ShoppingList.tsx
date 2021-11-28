@@ -63,12 +63,15 @@ export const ShoppingList: React.FC<{
                     <Badge
                       // color="secondary"
 
-                      badgeContent={item.total.toString().split(".")[1]}
+                      badgeContent={item.total
+                        .toString()
+                        ?.split(".")[1]
+                        ?.slice(0, 2)}
                       showZero
                     >
                       <span style={{ color: "green", fontSize: 14 }}>$</span>
                       <span style={{ padding: "1px" }}>
-                        {item.total.toString().split(".")[0]}
+                        {item.total.toString()?.split(".")[0]}
                       </span>
                     </Badge>
                     {/* </ListItemText> */}
@@ -94,23 +97,22 @@ export const ShoppingList: React.FC<{
                   <Badge
                     // color="secondary"
 
-                    badgeContent={`${Number(
-                      cartItems
-                        .reduce((a, b) => a + b.total, 0)
-                        .toString()
-                        .split(".")[1]
-                    )}`}
+                    badgeContent={cartItems
+                      .reduce((a, b) => a + b.total, 0)
+                      .toString()
+                      ?.split(".")[1]
+                      ?.slice(0, 2)}
                     showZero
                   >
                     {`Total: `}
                     <span style={{ color: "green", fontSize: 14 }}>$</span>
                     <span style={{ padding: "1px" }}>
-                      {`${Number(
+                      {
                         cartItems
                           .reduce((a, b) => a + b.total, 0)
                           .toString()
-                          .split(".")[0]
-                      )}`}
+                          ?.split(".")[0]
+                      }
                     </span>
                   </Badge>
                 </ListItemText>
