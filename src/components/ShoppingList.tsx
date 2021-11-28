@@ -8,7 +8,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Badge } from "@material-ui/core";
 
 import { PlusCircle, DashCircle, Trash } from "@styled-icons/bootstrap";
 import { ItemType } from "./Item";
@@ -46,7 +46,7 @@ export const ShoppingList: React.FC<{
           {cartItems.length
             ? cartItems.map((item, index) => (
                 <ListItem key={index}>
-                  <ListItemText primary={item.title} />
+                  <ListItemText secondary={`${index + 1}. ${item.title}`} />
 
                   <StyledMenu>
                     <StyledSubMenu>
@@ -59,7 +59,19 @@ export const ShoppingList: React.FC<{
                       </IconButton>
                     </StyledSubMenu>
 
-                    <ListItemText primary={`$${item.total}`} />
+                    {/* <ListItemText> */}
+                    <Badge
+                      // color="secondary"
+
+                      badgeContent={item.total.toString().split(".")[1]}
+                      showZero
+                    >
+                      <span style={{ color: "green", fontSize: 14 }}>$</span>
+                      <span style={{ padding: "1px" }}>
+                        {item.total.toString().split(".")[0]}
+                      </span>
+                    </Badge>
+                    {/* </ListItemText> */}
                     <IconButton onClick={() => removeCartItem(item)}>
                       <Trash size={20} color="red" />
                     </IconButton>
@@ -73,12 +85,35 @@ export const ShoppingList: React.FC<{
           <ListItem>
             {cartItems.length ? (
               <>
-                <ListItemText
-                  primary={`Total:$${cartItems.reduce(
-                    (a, b) => a + b.total,
-                    0
-                  )}`}
-                />
+                <ListItemText>
+                  {/* {`Total: `}
+                  <span style={{ color: "green", fontSize: 14 }}>$</span>
+                  {`${Number(
+                    cartItems.reduce((a, b) => a + b.total, 0).toFixed(2)
+                  )}`} */}
+                  <Badge
+                    // color="secondary"
+
+                    badgeContent={`${Number(
+                      cartItems
+                        .reduce((a, b) => a + b.total, 0)
+                        .toString()
+                        .split(".")[1]
+                    )}`}
+                    showZero
+                  >
+                    {`Total: `}
+                    <span style={{ color: "green", fontSize: 14 }}>$</span>
+                    <span style={{ padding: "1px" }}>
+                      {`${Number(
+                        cartItems
+                          .reduce((a, b) => a + b.total, 0)
+                          .toString()
+                          .split(".")[0]
+                      )}`}
+                    </span>
+                  </Badge>
+                </ListItemText>
                 <Button
                   variant="contained"
                   color="primary"
