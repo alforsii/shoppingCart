@@ -13,7 +13,13 @@ import { IconButton } from "@material-ui/core";
 import { PlusCircle, DashCircle, Trash } from "@styled-icons/bootstrap";
 import { ItemType } from "./Item";
 
-const StyledListMenu = styled.div`
+const StyledMenu = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+`;
+const StyledSubMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,20 +48,22 @@ export const ShoppingList: React.FC<{
                 <ListItem key={index}>
                   <ListItemText primary={item.title} />
 
-                  <StyledListMenu>
-                    <IconButton onClick={() => decreaseItem(item)}>
-                      <DashCircle size={20} />
-                    </IconButton>
-                    <ListItemText>{`${item.qty}`}</ListItemText>
-                    <IconButton onClick={() => increaseItem(item)}>
-                      <PlusCircle size={20} />
-                    </IconButton>
-                  </StyledListMenu>
+                  <StyledMenu>
+                    <StyledSubMenu>
+                      <IconButton onClick={() => decreaseItem(item)}>
+                        <DashCircle size={20} />
+                      </IconButton>
+                      <ListItemText>{`${item.qty}`}</ListItemText>
+                      <IconButton onClick={() => increaseItem(item)}>
+                        <PlusCircle size={20} />
+                      </IconButton>
+                    </StyledSubMenu>
 
-                  <ListItemText primary={`$${item.total}`} />
-                  <IconButton onClick={() => removeCartItem(item)}>
-                    <Trash size={20} color="red" />
-                  </IconButton>
+                    <ListItemText primary={`$${item.total}`} />
+                    <IconButton onClick={() => removeCartItem(item)}>
+                      <Trash size={20} color="red" />
+                    </IconButton>
+                  </StyledMenu>
                 </ListItem>
               ))
             : null}
