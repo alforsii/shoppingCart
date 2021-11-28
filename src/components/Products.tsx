@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 import { LinearProgress, Grid } from "@material-ui/core";
 import { Item, ItemType } from "./Item";
 import styled from "styled-components";
